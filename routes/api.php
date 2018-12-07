@@ -16,3 +16,23 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//get all clients
+Route::get('/clients', function(){
+    return \App\Client::all();
+});
+
+//get all drivers
+Route::get('/drivers', function(){
+    return \App\Driver::all();
+});
+
+//get all ServiceableRequests
+Route::get('/serviceable-requests', function(){
+    return \App\ServiceableRequests::all();
+});
+
+//get all history
+Route::get('/history', function(){
+    return \App\History::all();
+});
