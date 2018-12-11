@@ -12,7 +12,7 @@ class Client extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone_number', 'rating'
+        'name', 'email', 'phone_number', 'rating', 'authenticated', 'password'
     ];
 
     /**
@@ -21,6 +21,6 @@ class Client extends Model
      * @var array
      */
     protected $hidden = [
-
+        'password'
     ];
 }
