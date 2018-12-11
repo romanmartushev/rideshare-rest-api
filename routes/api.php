@@ -36,3 +36,33 @@ Route::get('/serviceable-requests', function(){
 Route::get('/history', function(){
     return \App\History::all();
 });
+
+/**
+ * Params:
+ * email
+ * password
+ * /api/login?email=winona.wintheiser@gmail.com&password=secret
+ */
+Route::get('/login', function(Request $request){
+   $client = \App\Client::where('email', $request->input('email'))->first();
+    if (\Illuminate\Support\Facades\Hash::check($request->input('password'), $client->password))
+    {
+        return ["authorized" => true];
+    }
+    return ["authorized" => false];
+});
+
+//registers a client ex /api/register?first_name=&last_name=&email=&phone_number&password=&confirm_password=
+/**
+ * Api Params:
+ * first_name
+ * last_name
+ * email
+ * phone_number
+ * password
+ * confirm_password
+ */
+Route::get('/register', function(Request $request){
+    $request['name'] = $request->input('first_name').' '.$request->input('last_name');
+    \App\Client::create($request);
+});

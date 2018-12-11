@@ -69,6 +69,8 @@
                     <li>/api/drivers</li>
                     <li>/api/serviceable-requests</li>
                     <li>/api/history</li>
+                    <li>/api/login?email=&password=</li>
+                    <li>/api/register?first_name=&last_name=&email=&phone_number&password=&confirm_password=</li>
                 </ul>
             </div>
         </div>

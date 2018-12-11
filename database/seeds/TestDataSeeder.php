@@ -19,7 +19,8 @@ class TestDataSeeder extends Seeder
                 'name' => $faker->name,
                 'email' => $faker->email,
                 'phone_number' => $faker->phoneNumber,
-                'rating' => $faker->numberBetween(0,5)
+                'rating' => $faker->numberBetween(0,5),
+                'password' => bcrypt('secret')
             ]);
         }
 
