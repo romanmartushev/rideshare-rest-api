@@ -47,12 +47,12 @@ Route::get('/login', function(Request $request){
    if($client = \App\Client::where('email', $request->input('email'))->first()){
         if (\Illuminate\Support\Facades\Hash::check($request->input('password'), $client->password))
         {
-            return ['authorized' => true, 'role' => 'client'];
+            return ['authorized' => true, 'role' => 'client', 'user' => $client];
         }
    }elseif($driver = \App\Driver::where('email', $request->input('email'))->first()){
        if (\Illuminate\Support\Facades\Hash::check($request->input('password'), $client->password))
        {
-           return ['authorized' => true, 'role' => 'driver'];
+           return ['authorized' => true, 'role' => 'driver', 'user' => $driver];
        }
    }
 
