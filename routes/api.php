@@ -74,10 +74,11 @@ Route::get('/register', function(Request $request){
         return ['error' => 'passwords do not match.'];
     }
     $request['name'] = $request->input('first_name').' '.$request->input('last_name');
+    $request['password'] = bcrypt($request->input('password'));
     if(\App\Client::where('email',$request->input('email'))->first()){
         return ['error' => 'This email is already associated with a user'];
     }else{
-        \App\Client::create($request);
+        \App\Client::create($request->all());
         return ['success' => 'The user was successfully created. You must now wait to be accepted by an admin before using our service. You will receive an email once you are accepted.'];
     }
 });
