@@ -59,7 +59,7 @@ Route::get('/login', function(Request $request){
    return ['authorized' => false];
 });
 
-//registers a client ex /api/register?first_name=&last_name=&email=&phone_number&password=&confirm_password=
+//registers a client ex /api/register?first_name=&last_name=&email=&phone_number=&password=&confirm_password=
 /**
  * Api Params:
  * first_name
@@ -70,6 +70,14 @@ Route::get('/login', function(Request $request){
  * confirm_password
  */
 Route::get('/register', function(Request $request){
+    if($request->input('password') != $request->input('confirm_password')){
+        return ['error' => 'passwords do not match.'];
+    }
     $request['name'] = $request->input('first_name').' '.$request->input('last_name');
-    \App\Client::create($request);
+    if(\App\Client::where('email',$request->input('email'))->first()){
+        return ['error' => 'This email is already associated with a user'];
+    }else{
+        \App\Client::create($request);
+        return ['success' => 'The user was successfully created. You must now wait to be accepted by an admin before using our service. You will receive an email once you are accepted.'];
+    }
 });
