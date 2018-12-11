@@ -71,6 +71,11 @@
                     <li>/api/history</li>
                     <li>/api/login?email=&password=</li>
                     <li>/api/register?first_name=&last_name=&email=&phone_number&password=&confirm_password=</li>
+                    <li>/api/driver?id=</li>
+                    <li>/api/client?id=</li>
+                    <li>/api/client?id=</li>
+                    <li>/api/client-requests?id=</li>
+                    <li>/api/driver-requests?id=</li>
                 </ul>
             </div>
         </div>
