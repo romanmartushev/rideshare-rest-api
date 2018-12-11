@@ -44,12 +44,19 @@ Route::get('/history', function(){
  * /api/login?email=winona.wintheiser@gmail.com&password=secret
  */
 Route::get('/login', function(Request $request){
-   $client = \App\Client::where('email', $request->input('email'))->first();
-    if (\Illuminate\Support\Facades\Hash::check($request->input('password'), $client->password))
-    {
-        return ["authorized" => true];
-    }
-    return ["authorized" => false];
+   if($client = \App\Client::where('email', $request->input('email'))->first()){
+        if (\Illuminate\Support\Facades\Hash::check($request->input('password'), $client->password))
+        {
+            return ['authorized' => true, 'role' => 'client'];
+        }
+   }elseif($driver = \App\Driver::where('email', $request->input('email'))->first()){
+       if (\Illuminate\Support\Facades\Hash::check($request->input('password'), $client->password))
+       {
+           return ['authorized' => true, 'role' => 'driver'];
+       }
+   }
+
+   return ['authorized' => false];
 });
 
 //registers a client ex /api/register?first_name=&last_name=&email=&phone_number&password=&confirm_password=

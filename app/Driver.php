@@ -12,7 +12,7 @@ class Driver extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone_number', 'rating', 'history'
+        'name', 'email', 'phone_number', 'rating', 'history', 'password'
     ];
 
     /**
@@ -21,6 +21,6 @@ class Driver extends Model
      * @var array
      */
     protected $hidden = [
-
+        'password'
     ];
 }
