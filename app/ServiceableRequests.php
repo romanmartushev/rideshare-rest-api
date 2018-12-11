@@ -12,7 +12,7 @@ class ServiceableRequests extends Model
      * @var array
      */
     protected $fillable = [
-        'client_id', 'destination_address', 'pick_up_address', 'estimated_length'
+        'client_id', 'driver_id' , 'status', 'destination_address', 'pick_up_address', 'estimated_length', 'time', 'date'
     ];
 
     /**

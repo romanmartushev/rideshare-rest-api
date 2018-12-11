@@ -15,9 +15,13 @@ class CreateHistoriesTable extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('request_id');
+            $table->integer('client_id');
             $table->integer('driver_id');
-            $table->integer('distance');
+            $table->string('destination_address')->default('');
+            $table->string('pick_up_address')->default('');
+            $table->string('estimated_length')->default('');
+            $table->string('time')->default('');
+            $table->string('date')->default('');
             $table->timestamps();
         });
     }

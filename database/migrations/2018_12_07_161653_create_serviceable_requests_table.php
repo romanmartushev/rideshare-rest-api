@@ -16,9 +16,13 @@ class CreateServiceableRequestsTable extends Migration
         Schema::create('serviceable_requests', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id');
+            $table->integer('driver_id')->default(0);
+            $table->integer('status')->default(0);
             $table->string('destination_address')->default('');
             $table->string('pick_up_address')->default('');
             $table->string('estimated_length')->default('');
+            $table->string('time')->default('');
+            $table->string('date')->default('');
             $table->timestamps();
         });
     }

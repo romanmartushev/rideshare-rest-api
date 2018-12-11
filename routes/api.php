@@ -17,22 +17,31 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//get all clients
+/**
+ * returns Clients
+ */
 Route::get('/clients', function(){
     return \App\Client::all();
 });
 
-//get all drivers
+/**
+ * returns Drivers
+ */
 Route::get('/drivers', function(){
     return \App\Driver::all();
 });
 
-//get all ServiceableRequests
+/**
+ * returns ServiceableRequests
+ */
 Route::get('/serviceable-requests', function(){
     return \App\ServiceableRequests::all();
+    //where status = 0
 });
 
-//get all history
+/**
+ * returns History
+ */
 Route::get('/history', function(){
     return \App\History::all();
 });
@@ -41,7 +50,7 @@ Route::get('/history', function(){
  * Params:
  * email
  * password
- * /api/login?email=winona.wintheiser@gmail.com&password=secret
+ * Example: /api/login?email=winona.wintheiser@gmail.com&password=secret
  */
 Route::get('/login', function(Request $request){
    if($client = \App\Client::where('email', $request->input('email'))->first()){
@@ -59,7 +68,6 @@ Route::get('/login', function(Request $request){
    return ['authorized' => false];
 });
 
-//registers a client ex /api/register?first_name=&last_name=&email=&phone_number=&password=&confirm_password=
 /**
  * Api Params:
  * first_name
@@ -68,6 +76,7 @@ Route::get('/login', function(Request $request){
  * phone_number
  * password
  * confirm_password
+ * Example: /api/register?first_name=&last_name=&email=&phone_number=&password=&confirm_password=
  */
 Route::get('/register', function(Request $request){
     if($request->input('password') != $request->input('confirm_password')){
@@ -81,4 +90,45 @@ Route::get('/register', function(Request $request){
         \App\Client::create($request->all());
         return ['success' => 'The user was successfully created. You must now wait to be accepted by an admin before using our service. You will receive an email once you are accepted.'];
     }
+});
+/**
+ * Params:
+ * id
+ * email
+ * name
+ * phone_number
+ * Example: /api/client?id=
+ */
+Route::get('/client', function(Request $request){
+    return \App\Client::where($request->all())->first();
+});
+
+/**
+ * Params:
+ * id
+ * email
+ * name
+ * phone_number
+ * Example: /api/driver?id=
+ */
+Route::get('/driver', function(Request $request){
+    return \App\Driver::where($request->all())->first();
+});
+
+/**
+ * Params:
+ * id
+ * Example: /api/client-requests?id=
+ */
+Route::get('/client-requests', function(Request $request){
+    return \App\ServiceableRequests::where(['client_id' => $request->input('id')])->get();
+});
+
+/**
+ * Params:
+ * id
+ * Example: /api/driver-requests?id=
+ */
+Route::get('/driver-requests', function(Request $request){
+    return \App\ServiceableRequests::where(['driver_id' => $request->input('id')])->get();
 });

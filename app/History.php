@@ -12,7 +12,7 @@ class History extends Model
      * @var array
      */
     protected $fillable = [
-        'request_id','driver_id', 'distance'
+        'client_id', 'driver_id' , 'destination_address', 'pick_up_address', 'estimated_length', 'time', 'date'
     ];
 
     /**

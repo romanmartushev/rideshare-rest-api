@@ -41,16 +41,22 @@ class TestDataSeeder extends Seeder
                 'client_id' => $faker->numberBetween(1,19),
                 'destination_address' => $faker->address,
                 'pick_up_address' => $faker->address,
-                'estimated_length' => $faker->numberBetween(1,5). ' hours'
+                'estimated_length' => $faker->numberBetween(1,5). ' hours',
+                'time' => $faker->time('H:i'),
+                'date' => $faker->date('m-d-Y')
             ]);
         }
 
         // Create 100 HistoryRequests
         for($i = 0; $i < 100; $i++){
             \App\History::create([
-                'request_id' => $faker->numberBetween(1,99),
+                'client_id' => $faker->numberBetween(1,19),
                 'driver_id' => $faker->numberBetween(1,19),
-                'distance' => $faker->numberBetween(1,100)
+                'destination_address' => $faker->address,
+                'pick_up_address' => $faker->address,
+                'estimated_length' => $faker->numberBetween(1,5). ' hours',
+                'time' => $faker->time('H:i'),
+                'date' => $faker->date('m-d-Y')
             ]);
         }
     }
