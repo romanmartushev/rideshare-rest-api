@@ -144,3 +144,16 @@ Route::get('/driver-requests', function(Request $request){
 Route::get('/create-request', function(Request $request){
     return \App\ServiceableRequests::create($request->all());
 });
+
+/**
+ * Params:
+ * request_id
+ * driver_id
+ */
+Route::get('/finished-request', function(Request $request){
+    $serviceable = \App\ServiceableRequests::where('id',$request->input('request_id'))->first();
+    $serviceable->driver_id = (integer)$request->input('driver_id');
+    $history = \App\History::create($serviceable->toArray());
+    $serviceable->delete();
+    return $history;
+});

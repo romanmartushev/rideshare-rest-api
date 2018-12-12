@@ -77,6 +77,7 @@
                     <li>/api/client-requests?id=</li>
                     <li>/api/driver-requests?id=</li>
                     <li>/api/create-request?client_id=&destination_address=&pick_up_address=&estimated_length=&time=&date=</li>
+                    <li>/api/finished-request?request_id=&driver_id=</li>
                 </ul>
             </div>
         </div>
