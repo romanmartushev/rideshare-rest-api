@@ -202,3 +202,22 @@ Route::get('/finished-request', function(Request $request){
     $serviceable->delete();
     return $history;
 });
+
+/**
+ * Params:
+ * client_id
+ * authorize
+ * /api/authorize-client?client_id=&authorize=
+ */
+Route::get('/authorize-client',function(Request $request){
+    $client = \App\Client::where('id', $request->input('client_id'))->first();
+    if($request->input('authorize') == 'yes'){
+        $client = \App\Client::where('id', $request->input('client_id'))->first();
+        $client->authenticated = true;
+        $client->save();
+        return $client;
+    }
+
+    $deleted = $client->delete();
+    return ['deleted' => $deleted];
+});
