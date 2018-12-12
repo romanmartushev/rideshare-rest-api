@@ -60,6 +60,7 @@ Route::get('/login', function(Request $request){
    }elseif($driver = \App\Driver::where('email', $request->input('email'))->first()){
        if (\Illuminate\Support\Facades\Hash::check($request->input('password'), $driver->password))
        {
+           $driver->online = true;
            return ['authorized' => true, 'role' => 'driver', 'user' => $driver];
        }
    }elseif ($admin = \App\User::where('email', $request->input('email'))->first()){
@@ -70,6 +71,18 @@ Route::get('/login', function(Request $request){
    }
 
    return ['authorized' => false];
+});
+
+/**
+ * Only used for drivers
+ * Params:
+ * email
+ */
+Route::get('/logout', function(Request $request){
+    if($driver = \App\Driver::where('email', $request->input('email'))->first()){
+        $driver->online = false;
+    }
+    return ['logout' => true];
 });
 
 /**
