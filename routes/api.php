@@ -61,6 +61,7 @@ Route::get('/login', function(Request $request){
        if (\Illuminate\Support\Facades\Hash::check($request->input('password'), $driver->password))
        {
            $driver->online = true;
+           $driver->save();
            return ['authorized' => true, 'role' => 'driver', 'user' => $driver];
        }
    }elseif ($admin = \App\User::where('email', $request->input('email'))->first()){
@@ -81,6 +82,7 @@ Route::get('/login', function(Request $request){
 Route::get('/logout', function(Request $request){
     if($driver = \App\Driver::where('email', $request->input('email'))->first()){
         $driver->online = false;
+        $driver->save();
     }
     return ['logout' => true];
 });
