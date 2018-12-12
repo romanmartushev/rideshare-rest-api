@@ -13,6 +13,12 @@ class TestDataSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
+        \App\User::create([
+            'name' => 'Roman Martushev',
+            'email' => 'martushev8@gmail.com',
+            'password' => bcrypt('secret')
+        ]);
+
         // Create 20 clients
         for($i = 0; $i < 20; $i++){
             \App\Client::create([
