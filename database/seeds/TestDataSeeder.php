@@ -19,8 +19,8 @@ class TestDataSeeder extends Seeder
             'password' => bcrypt('secret')
         ]);
 
-        // Create 20 clients
-        for($i = 0; $i < 20; $i++){
+        // Create 5 clients
+        for($i = 0; $i < 5; $i++){
             \App\Client::create([
                 'name' => $faker->name,
                 'email' => $faker->email,
@@ -30,8 +30,8 @@ class TestDataSeeder extends Seeder
             ]);
         }
 
-        // Create 20 drivers
-        for($i = 0; $i < 20; $i++){
+        // Create 5 drivers
+        for($i = 0; $i < 5; $i++){
             \App\Driver::create([
                 'name' => $faker->name,
                 'email' => $faker->email,
@@ -41,10 +41,10 @@ class TestDataSeeder extends Seeder
             ]);
         }
 
-        // Create 100 ServiceableRequests
-        for($i = 0; $i < 100; $i++){
+        // Create 20 ServiceableRequests
+        for($i = 0; $i < 20; $i++){
             \App\ServiceableRequests::create([
-                'client_id' => $faker->numberBetween(1,19),
+                'client_id' => $faker->numberBetween(1,5),
                 'destination_address' => $faker->address,
                 'pick_up_address' => $faker->address,
                 'estimated_length' => $faker->numberBetween(1,5). ' hours',
@@ -53,11 +53,11 @@ class TestDataSeeder extends Seeder
             ]);
         }
 
-        // Create 100 HistoryRequests
-        for($i = 0; $i < 100; $i++){
+        // Create 20 HistoryRequests
+        for($i = 0; $i < 20; $i++){
             \App\History::create([
-                'client_id' => $faker->numberBetween(1,19),
-                'driver_id' => $faker->numberBetween(1,19),
+                'client_id' => $faker->numberBetween(1,5),
+                'driver_id' => $faker->numberBetween(1,5),
                 'destination_address' => $faker->address,
                 'pick_up_address' => $faker->address,
                 'estimated_length' => $faker->numberBetween(1,5). ' hours',

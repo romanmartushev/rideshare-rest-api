@@ -187,7 +187,11 @@ Route::get('/driver-requests', function(Request $request){
  * date
  */
 Route::get('/create-request', function(Request $request){
-    return \App\ServiceableRequests::create($request->all());
+    $client = \App\Client::where('id',$request->input('client_id'))->first();
+    if($client->authenticated){
+        return \App\ServiceableRequests::create($request->all());
+    }
+    return ['error' => 'Not Authenticated'];
 });
 
 /**
