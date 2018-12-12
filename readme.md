@@ -67,3 +67,23 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## API Routes
+
+- /api/clients - returns all clients
+- /api/drivers - returns all drivers
+- /api/serviceable-requests - returns all serviceable requests
+- /api/history - returns all requests that have been fulfilled
+- /api/login?email={email}&password={password} - returns if the client is authorized, the clients role, and the client object. The same for driver and admin.
+- /api/logout?email={email} - returns true and marks driver as offline
+- /api/register?first_name={first_name}&last_name={last_name}&email={email}&phone_number={phone_number}&password={password}&confirm_password={confirm_password} - returns error if passwords do not match. Returns error if emails match. Returns success if the client is successfully created. (only to be used for clients).
+- /api/register-driver?first_name={first_name}&last_name={last_name}&email={email}&phone_number={phone_number}&password={password}&confirm_password={confirm_password} - same as client register except returns driver object. Also needs to be only accessible to admin.
+- /api/driver?id={id} - return the driver provided the id
+- /api/client?id={id} - return the client provided the id
+- /api/client-requests?id={id} - return a client’s serviceable requests provided client id
+- /api/driver-requests?id={id} - return a driver’s serviceable requests provided driver id. (returns requests currently in progress by the specified driver)
+- /api/create-request?client_id={client_id}&destination_address={destination_address}&pick_up_address={pick_up_address}&estimated_length={estimated_length}&time={time}&date={date} - return the serviceable request that was created. Returns error if client is not authorized.
+- /api/finished-request?request_id={request_id}&driver_id={driver_id} - returns the history object that was created after the service request is deleted.
+- /api/authorize-client?client_id={client_id}&authorize={authorize} - returns the client object that was authorized. Returns deleted if the client is not authorized. The parameter authorized should be the string ‘yes’ or ‘no’. Only to be accessed by admin.
+- /api/accept-request?driver_id={driver_id}&request_id={request_id} - returns the serviceable request that has been updated to a in-route status rather than pending.
+
