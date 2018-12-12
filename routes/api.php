@@ -58,7 +58,7 @@ Route::get('/login', function(Request $request){
             return ['authorized' => true, 'role' => 'client', 'user' => $client];
         }
    }elseif($driver = \App\Driver::where('email', $request->input('email'))->first()){
-       if (\Illuminate\Support\Facades\Hash::check($request->input('password'), $client->password))
+       if (\Illuminate\Support\Facades\Hash::check($request->input('password'), $driver->password))
        {
            return ['authorized' => true, 'role' => 'driver', 'user' => $driver];
        }
