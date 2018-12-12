@@ -110,6 +110,31 @@ Route::get('/register', function(Request $request){
         return ['success' => 'The user was successfully created. You must now wait to be accepted by an admin before using our service. You will receive an email once you are accepted.'];
     }
 });
+
+/**
+ * Api Params:
+ * first_name
+ * last_name
+ * email
+ * phone_number
+ * password
+ * confirm_password
+ * Example: /api/register-driver?first_name=&last_name=&email=&phone_number=&password=&confirm_password=
+ */
+Route::get('/register-driver', function(Request $request){
+    if($request->input('password') != $request->input('confirm_password')){
+        return ['error' => 'passwords do not match.'];
+    }
+    $request['name'] = $request->input('first_name').' '.$request->input('last_name');
+    $request['password'] = bcrypt($request->input('password'));
+    if(\App\Driver::where('email',$request->input('email'))->first()){
+        return ['error' => 'This email is already associated with a driver'];
+    }else{
+        \App\Driver::create($request->all());
+        return ['success' => 'The driver was successfully created.'];
+    }
+});
+
 /**
  * Params:
  * id
