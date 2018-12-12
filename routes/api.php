@@ -221,3 +221,16 @@ Route::get('/authorize-client',function(Request $request){
     $deleted = $client->delete();
     return ['deleted' => $deleted];
 });
+
+/**
+ * Params:
+ * driver_id
+ * request_id
+ * /api/accept-request?driver_id=&request_id=
+ */
+Route::get('/accept-request', function(Request $request){
+    $serviceable = \App\ServiceableRequests::where('id', $request->input('request_id'))->first();
+    $serviceable->status = true;
+    $serviceable->driver_id = $request->input('driver_id');
+    return $serviceable;
+});

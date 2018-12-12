@@ -81,6 +81,7 @@
                     <li>/api/create-request?client_id=&destination_address=&pick_up_address=&estimated_length=&time=&date=</li>
                     <li>/api/finished-request?request_id=&driver_id=</li>
                     <li>/api/authorize-client?client_id=&authorize=</li>
+                    <li>/api/accept-request?driver_id=&request_id=</li>
                 </ul>
             </div>
         </div>
