@@ -233,6 +233,7 @@ Route::get('/accept-request', function(Request $request){
     if(!$serviceable->status){
         $serviceable->status = true;
         $serviceable->driver_id = $request->input('driver_id');
+        $serviceable->save();
     }
     return $serviceable;
 });
