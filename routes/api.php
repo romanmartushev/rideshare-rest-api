@@ -230,7 +230,9 @@ Route::get('/authorize-client',function(Request $request){
  */
 Route::get('/accept-request', function(Request $request){
     $serviceable = \App\ServiceableRequests::where('id', $request->input('request_id'))->first();
-    $serviceable->status = true;
-    $serviceable->driver_id = $request->input('driver_id');
+    if(!$serviceable->status){
+        $serviceable->status = true;
+        $serviceable->driver_id = $request->input('driver_id');
+    }
     return $serviceable;
 });
