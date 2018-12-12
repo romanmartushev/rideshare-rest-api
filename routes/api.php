@@ -36,7 +36,6 @@ Route::get('/drivers', function(){
  */
 Route::get('/serviceable-requests', function(){
     return \App\ServiceableRequests::all();
-    //where status = 0
 });
 
 /**
@@ -131,4 +130,17 @@ Route::get('/client-requests', function(Request $request){
  */
 Route::get('/driver-requests', function(Request $request){
     return \App\ServiceableRequests::where(['driver_id' => $request->input('id')])->get();
+});
+
+/**
+ * Params:
+ * client_id
+ * destination_address
+ * pick_up_address
+ * estimated_length
+ * time
+ * date
+ */
+Route::get('/create-request', function(Request $request){
+    return \App\ServiceableRequests::create($request->all());
 });
