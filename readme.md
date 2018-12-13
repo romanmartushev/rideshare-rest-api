@@ -87,3 +87,30 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - /api/authorize-client?client_id={client_id}&authorize={authorize} - returns the client object that was authorized. Returns deleted if the client is not authorized. The parameter authorized should be the string ‘yes’ or ‘no’. Only to be accessed by admin.
 - /api/accept-request?driver_id={driver_id}&request_id={request_id} - returns the serviceable request that has been updated to a in-route status rather than pending.
 
+## Creating A Route
+In order to create a route you must go to the routes/api.php file.
+
+You will see that the routes take the shape:
+<code>
+- Route::get($uri, $callback);
+- Route::post($uri, $callback);
+- Route::put($uri, $callback);
+- Route::patch($uri, $callback);
+- Route::delete($uri, $callback);
+- Route::options($uri, $callback);
+</code>
+
+To look up more routing documentation look at [Laravel's Routing](https://laravel.com/docs/5.7/routing) documentation.
+
+## The Models
+
+We have a few different models used that are linked to a database table they are found in the app/ directory:
+- Client
+- Driver
+- History
+- ServiceableRequests
+- User
+
+These do not have much to them looking at [Laravel's Eloquent: Getting Started](https://laravel.com/docs/5.7/eloquent)
+will give you everything you need to know about working with them.
+
